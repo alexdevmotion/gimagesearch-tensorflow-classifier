@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gimagesearch classifier</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/basic.min.css"
+          integrity="sha256-RvDmZ4ZtPtrWmZdibCa80jCE32m21xuR5SuW6zfJaW4=" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css"
+          integrity="sha256-e47xOkXs1JXFbjjpoRr1/LhVcqSzRmGmPqsrUQeVs+g=" crossorigin="anonymous"/>
+</head>
+<body>
+
+<form action="/classify"
+      class="dropzone"
+      id="my-awesome-dropzone">
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.js"
+        integrity="sha256-Rnxk6lia2GZLfke2EKwKWPjy0q2wCW66SN1gKCXquK4=" crossorigin="anonymous"></script>
+<script>
+  Dropzone.options.myAwesomeDropzone = {
+    init: function () {
+      this.on('success', function (file, response) {
+        var winner = response[0];
+        alert('I\'m ' + winner['confidence'] * 100 + '% confident this is a ' + winner['class']);
+      });
+    },
+  };
+</script>
+</body>
+</html>
