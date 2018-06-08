@@ -72,7 +72,7 @@ def load_labels(label_file):
     return label
 
 
-def classify(model_file, label_file, file_name, input_height=299, input_width=299, input_mean=0, input_std=255,
+def classify(file_name, model_file, label_file, input_height=299, input_width=299, input_mean=0, input_std=255,
              input_layer="Placeholder", output_layer="final_result"):
     graph = load_graph(model_file)
     t = read_tensor_from_image_file(
@@ -97,7 +97,7 @@ def classify(model_file, label_file, file_name, input_height=299, input_width=29
     labels = load_labels(label_file)
     result = []
     for i in top_k:
-        result.append([labels[i], results[i]])
+        result.append({'class': labels[i], 'confidence': '%.4f' % results[i]})
     return result
 
 
@@ -108,5 +108,5 @@ if __name__ == "__main__":
     parser.add_argument("--image", help="image to be processed")
     args = parser.parse_args()
 
-    result = classify(args.graph, args.labels, args.image)
+    result = classify(args.labels, args.image, args.graph)
     print(result)
