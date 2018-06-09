@@ -4,17 +4,15 @@ A classifier similar to the google image search tool; categories: face, photo, c
 
 
 ## Prerequisites
-- Python 3.5 with pip (I used Anaconda)
+- Python 3.5 with pip (I used 64bit Anaconda 5.2.0)
 
 
-## Setting up
+## Setup
 ```
 pip install tensorflow
 pip install tensorflow_hub
 pip install flask
 ```
-There may be other requirements which I missed; just do a pip install of whatever missing module pops up
-
 
 ## Firing up the app
 #### Windows only
@@ -22,6 +20,7 @@ Linux users, I'm sure you'll figure out how to rewrite the complex start script 
 ```
 start.cmd
 ```
+Note: The python installation and Scripts folders need to be in your ``%PATH%``
 
 
 ## Enriching the dataset
@@ -51,4 +50,21 @@ If you get an error during training, just delete the image.
  --print_misclassified_test_images
 ```
 Using the included dataset and the params above, on a Core i5 @ 3.3Ghz + Nvidia GTX 970 using latest tensorflow-gpu, CUDA, cuDNN it took ~ 25 mins
+
 I also attempted to use ``--random_crop 10 --random_scale 10 --random_brightness 10 --flip_left_right`` but training took way too long on my machine (30 mins for 30 steps).
+
+
+## Training & testing results
+90% train, 10% test
+```
+INFO:tensorflow:Final test accuracy = 98.1% (N=424)
+INFO:tensorflow:=== MISCLASSIFIED TEST IMAGES ===
+INFO:tensorflow:                                            input\clipart\00000518.jpg  line
+INFO:tensorflow:                                            input\clipart\00000518.jpg  line
+INFO:tensorflow:                                               input\face\00000326.jpg  line
+INFO:tensorflow:                                               input\face\00000326.jpg  line
+INFO:tensorflow:                                               input\line\00000315.jpg  clipart
+INFO:tensorflow:input\line\stock-vector-sea-life-wildlife-animal-white-shark-decal-art-vector-isolated-decor-tribal-tattoo-design-632947772.jpg  clipart
+INFO:tensorflow:                                               input\line\00000315.jpg  clipart
+INFO:tensorflow:input\line\stock-vector-sea-life-wildlife-animal-white-shark-decal-art-vector-isolated-decor-tribal-tattoo-design-632947772.jpg  clipart
+```
