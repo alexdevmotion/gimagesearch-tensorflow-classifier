@@ -41,6 +41,7 @@ If you get an error during training, just delete the image.
 
 
 ## Retraining the model
+Followed official guide for retraining an image classifier for new categories: https://www.tensorflow.org/tutorials/image_retraining
 #### Defaults:
 - model: https://www.tensorflow.org/hub/modules/google/imagenet/inception_v3/feature_vector/1
 - learning rate: 0.01
