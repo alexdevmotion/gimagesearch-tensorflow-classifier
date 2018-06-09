@@ -2,6 +2,7 @@
 # python download_images.py --urls urls.txt --output images/santa
 
 # import the necessary packages
+from urllib.parse import urlparse
 from imutils import paths
 import argparse
 import requests
@@ -31,10 +32,11 @@ for url in rows:
         if extension not in ACCEPTED_EXTENSIONS:
             continue
         r = requests.get(url, timeout=60)
+        a = urlparse(url)
+        filename = os.path.basename(a.path)
 
         # save the image to disk
-        p = os.path.sep.join([args['output'], ('{}' + extension).format(
-            str(total).zfill(8))])
+        p = os.path.sep.join([args['output'], filename])
         f = open(p, 'wb')
         f.write(r.content)
         f.close()
